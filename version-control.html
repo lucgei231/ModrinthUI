@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Version Control - Modrinth Web App</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Version Control</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="user-management.html">User Management</a></li>
+                <li><a href="notifications.html">Notifications</a></li>
+                <li><a href="payouts.html">Payouts</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="project-management.html">Project Management</a></li>
+                <li><a href="version-control.html">Version Control</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="threads.html">Threads</a></li>
+                <li><a href="collections.html">Collections</a></li>
+                <li><a href="organizations.html">Organizations</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="version-management">
+            <h2>Manage Project Versions</h2>
+            <form id="version-form">
+                <label for="version-name">Version Name:</label>
+                <input type="text" id="version-name" required>
+                
+                <label for="version-description">Description:</label>
+                <textarea id="version-description" required></textarea>
+                
+                <button type="submit">Create Version</button>
+            </form>
+            <h3>Version History</h3>
+            <ul id="version-history">
+                <!-- Version history will be populated here -->
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Modrinth Web App</p>
+    </footer>
+    <script src="js/app.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        // JavaScript to handle version control functionality
+        document.getElementById('version-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const versionName = document.getElementById('version-name').value;
+            const versionDescription = document.getElementById('version-description').value;
+            // Call API to create version
+            // api.createVersion(versionName, versionDescription).then(updateVersionHistory);
+        });
+
+        function updateVersionHistory() {
+            // Call API to get version history and update the version-history list
+            // api.getVersionHistory().then(versions => {
+            //     const versionHistoryList = document.getElementById('version-history');
+            //     versionHistoryList.innerHTML = '';
+            //     versions.forEach(version => {
+            //         const li = document.createElement('li');
+            //         li.textContent = `${version.name}: ${version.description}`;
+            //         versionHistoryList.appendChild(li);
+            //     });
+            // });
+        }
+
+        // Initial load of version history
+        updateVersionHistory();
+    </script>
+</body>
+</html>

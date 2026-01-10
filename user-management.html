@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>User Management</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="notifications.html">Notifications</a></li>
+                <li><a href="payouts.html">Payouts</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="project-management.html">Projects</a></li>
+                <li><a href="version-control.html">Versions</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="threads.html">Threads</a></li>
+                <li><a href="collections.html">Collections</a></li>
+                <li><a href="organizations.html">Organizations</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="user-data">
+            <h2>Manage User Data</h2>
+            <form id="user-form">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <button type="submit">Save Changes</button>
+            </form>
+        </section>
+        <section id="user-info">
+            <h2>User Information</h2>
+            <div id="user-details">
+                <!-- User details will be displayed here -->
+            </div>
+        </section>
+    </main>
+    <script src="js/app.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        // Fetch and display user data
+        async function fetchUserData() {
+            const userDetails = document.getElementById('user-details');
+            const userData = await getUserData(); // Assuming getUserData is defined in api.js
+            userDetails.innerHTML = `
+                <p>Email: ${userData.email}</p>
+                <p>Username: ${userData.username}</p>
+            `;
+        }
+
+        document.getElementById('user-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
+            await updateUserData({ email, username }); // Assuming updateUserData is defined in api.js
+            fetchUserData();
+        });
+
+        fetchUserData();
+    </script>
+</body>
+</html>

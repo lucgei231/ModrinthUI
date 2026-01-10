@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizations Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Organizations Management</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="user-management.html">User Management</a></li>
+                <li><a href="notifications.html">Notifications</a></li>
+                <li><a href="payouts.html">Payouts</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="project-management.html">Project Management</a></li>
+                <li><a href="version-control.html">Version Control</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="threads.html">Threads</a></li>
+                <li><a href="collections.html">Collections</a></li>
+                <li><a href="organizations.html">Organizations</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="organization-form">
+            <h2>Create or Manage Organizations</h2>
+            <form id="create-organization-form">
+                <label for="org-name">Organization Name:</label>
+                <input type="text" id="org-name" required>
+                <button type="submit">Create Organization</button>
+            </form>
+        </section>
+        <section id="organization-list">
+            <h2>Existing Organizations</h2>
+            <ul id="organizations">
+                <!-- Organizations will be dynamically populated here -->
+            </ul>
+        </section>
+    </main>
+    <script src="js/app.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        // JavaScript to handle organization management will go here
+    </script>
+</body>
+</html>

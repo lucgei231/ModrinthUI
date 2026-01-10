@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Modrinth Web App</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Settings</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="user-management.html">User Management</a></li>
+                <li><a href="notifications.html">Notifications</a></li>
+                <li><a href="payouts.html">Payouts</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="project-management.html">Project Management</a></li>
+                <li><a href="version-control.html">Version Control</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="threads.html">Threads</a></li>
+                <li><a href="collections.html">Collections</a></li>
+                <li><a href="organizations.html">Organizations</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Personal Access Token (PAT)</h2>
+            <form id="pat-form">
+                <label for="pat-input">Enter your Personal Access Token:</label>
+                <input type="text" id="pat-input" placeholder="Your PAT here" required>
+                <button type="submit">Save PAT</button>
+            </form>
+            <p id="message"></p>
+        </section>
+    </main>
+    <script src="js/settings.js"></script>
+</body>
+</html>

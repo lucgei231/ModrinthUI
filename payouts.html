@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payouts Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Payouts Management</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="user-management.html">User Management</a></li>
+                <li><a href="notifications.html">Notifications</a></li>
+                <li><a href="payouts.html">Payouts</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="project-management.html">Project Management</a></li>
+                <li><a href="version-control.html">Version Control</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="threads.html">Threads</a></li>
+                <li><a href="collections.html">Collections</a></li>
+                <li><a href="organizations.html">Organizations</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="payouts">
+            <h2>Payout Information</h2>
+            <div id="payout-list">
+                <!-- Payout details will be dynamically loaded here -->
+            </div>
+            <h3>Submit New Payout Request</h3>
+            <form id="payout-form">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" required>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+                <button type="submit">Submit Payout</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Modrinth Web App</p>
+    </footer>
+    <script src="js/app.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        // JavaScript to handle payouts functionality will go here
+    </script>
+</body>
+</html>

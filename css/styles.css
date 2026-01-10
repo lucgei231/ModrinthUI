@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav {
+    margin: 20px 0;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+nav a:hover {
+    background: #2c3e50;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    color: #35424a;
+}
+
+form {
+    margin: 20px 0;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form input[type="submit"] {
+    background: #35424a;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+form input[type="submit"]:hover {
+    background: #2c3e50;
+}
+
+.notification {
+    background: #e7f3fe;
+    color: #31708f;
+    padding: 10px;
+    border-left: 5px solid #31708f;
+    margin: 10px 0;
+}
+
+.error {
+    background: #f2dede;
+    color: #a94442;
+    padding: 10px;
+    border-left: 5px solid #a94442;
+    margin: 10px 0;
+}
+
+.success {
+    background: #dff0d8;
+    color: #3c763d;
+    padding: 10px;
+    border-left: 5px solid #3c763d;
+    margin: 10px 0;
+}
