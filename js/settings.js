@@ -1,7 +1,6 @@
-const settingsForm = document.getElementById('settings-form');
+const settingsForm = document.getElementById('pat-form');
 const patInput = document.getElementById('pat-input');
-const saveButton = document.getElementById('save-button');
-const messageBox = document.getElementById('message-box');
+const messageBox = document.getElementById('message');
 
 // Load the PAT from localStorage when the page loads
 window.onload = function() {
@@ -12,7 +11,7 @@ window.onload = function() {
 };
 
 // Save the PAT to localStorage when the form is submitted
-saveButton.addEventListener('click', function(event) {
+settingsForm.addEventListener('submit', function(event) {
     event.preventDefault();
     const pat = patInput.value.trim();
     
