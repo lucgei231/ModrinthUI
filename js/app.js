@@ -2,7 +2,7 @@
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
-    setupNavigation();
+    // setupNavigation(); // Disabled since we're using server-side navigation
     loadSettings();
 });
 
