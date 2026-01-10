@@ -135,6 +135,45 @@ table tr:hover {
     background-color: #3a3a3a;
 }
 
+.project-item {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    background: #3a3a3a;
+    border-radius: 5px;
+}
+
+.project-item img {
+    margin-right: 10px;
+}
+
+.project-item h3 {
+    margin: 0;
+    color: #00aff4;
+}
+
+.project-item p {
+    margin: 5px 0;
+    color: #ffffff;
+}
+
+.project-item button {
+    margin-left: auto;
+}
+
+.version-item {
+    margin: 10px 0;
+    padding: 10px;
+    background: #2d2d2d;
+    border-radius: 5px;
+}
+
+.version-item h4 {
+    margin: 0;
+    color: #00aff4;
+}
+
 footer {
     text-align: center;
     padding: 10px;
