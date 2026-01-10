@@ -1,19 +1,30 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #1a1a1a;
+    color: #ffffff;
 }
 
 header {
-    background: #35424a;
+    background: #2d2d2d;
     color: #ffffff;
     padding: 10px 0;
     text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
-nav {
-    margin: 20px 0;
+nav ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+nav li {
+    margin: 0 15px;
 }
 
 nav a {
@@ -21,25 +32,27 @@ nav a {
     text-decoration: none;
     padding: 10px 15px;
     border-radius: 5px;
-    transition: background 0.3s;
+    transition: background 0.3s, color 0.3s;
 }
 
 nav a:hover {
-    background: #2c3e50;
+    background: #00aff4;
+    color: #1a1a1a;
 }
 
 .container {
-    width: 80%;
-    margin: auto;
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
     overflow: hidden;
     padding: 20px;
-    background: #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #2d2d2d;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 h1, h2, h3 {
-    color: #35424a;
+    color: #00aff4;
 }
 
 form {
@@ -52,24 +65,29 @@ form input[type="password"],
 form textarea,
 form select {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid #555;
     border-radius: 5px;
+    background-color: #3a3a3a;
+    color: #ffffff;
 }
 
-form input[type="submit"] {
-    background: #35424a;
-    color: #ffffff;
+form input[type="submit"],
+button {
+    background: #00aff4;
+    color: #1a1a1a;
     border: none;
-    padding: 10px 15px;
+    padding: 12px 20px;
     cursor: pointer;
     border-radius: 5px;
     transition: background 0.3s;
+    font-weight: bold;
 }
 
-form input[type="submit"]:hover {
-    background: #2c3e50;
+form input[type="submit"]:hover,
+button:hover {
+    background: #0088cc;
 }
 
 .notification {
@@ -94,4 +112,33 @@ form input[type="submit"]:hover {
     padding: 10px;
     border-left: 5px solid #3c763d;
     margin: 10px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #555;
+}
+
+table th {
+    background-color: #3a3a3a;
+    color: #00aff4;
+}
+
+table tr:hover {
+    background-color: #3a3a3a;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #2d2d2d;
+    color: #ffffff;
+    margin-top: 20px;
 }
