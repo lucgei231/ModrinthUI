@@ -199,6 +199,9 @@ async function getVersions() {
             'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0'
         }
     });
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     return response.json();
 }
 
@@ -226,6 +229,9 @@ async function getReports() {
             'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0'
         }
     });
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     return response.json();
 }
 
@@ -253,6 +259,9 @@ async function getThreads() {
             'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0'
         }
     });
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     return response.json();
 }
 
@@ -280,6 +289,9 @@ async function getCollections() {
             'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0'
         }
     });
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     return response.json();
 }
 
@@ -307,5 +319,8 @@ async function getOrganizations() {
             'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0'
         }
     });
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     return response.json();
 }
