@@ -55,11 +55,31 @@
 
         function loadThreads() {
             // Fetch threads from API and display them
+            getThreads().then(threads => {
+                const threadsList = document.getElementById('threads');
+                threadsList.innerHTML = '';
+                threads.forEach(thread => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong>${thread.title}</strong>: ${thread.content}`;
+                    threadsList.appendChild(li);
+                });
+            }).catch(error => {
+                console.error('Error loading threads:', error);
+                alert('Failed to load threads: ' + error.message);
+            });
         }
 
         function createThread(event) {
             event.preventDefault();
-            // Logic to create a new thread using API
+            const title = document.getElementById('thread-title').value;
+            const content = document.getElementById('thread-content').value;
+            manageThread({ title, content }).then(() => {
+                document.getElementById('thread-form').reset();
+                loadThreads();
+            }).catch(error => {
+                console.error('Error creating thread:', error);
+                alert('Failed to create thread.');
+            });
         }
     </script>
 </body>

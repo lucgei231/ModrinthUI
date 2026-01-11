@@ -51,29 +51,38 @@
     <script src="js/api.js"></script>
     <script>
         // JavaScript to handle version control functionality
-        document.getElementById('version-form').addEventListener('submit', function(event) {
+        document.getElementById('version-form').addEventListener('submit', async function(event) {
             event.preventDefault();
-            const versionName = document.getElementById('version-name').value;
-            const versionDescription = document.getElementById('version-description').value;
-            // Call API to create version
-            // api.createVersion(versionName, versionDescription).then(updateVersionHistory);
+            const name = document.getElementById('version-name').value;
+            const description = document.getElementById('version-description').value;
+            try {
+                await manageVersion({ name, changelog: description });
+                document.getElementById('version-form').reset();
+                updateVersionHistory();
+            } catch (error) {
+                console.error('Error creating version:', error);
+                alert('Failed to create version.');
+            }
         });
 
         function updateVersionHistory() {
             // Call API to get version history and update the version-history list
-            // api.getVersionHistory().then(versions => {
-            //     const versionHistoryList = document.getElementById('version-history');
-            //     versionHistoryList.innerHTML = '';
-            //     versions.forEach(version => {
-            //         const li = document.createElement('li');
-            //         li.textContent = `${version.name}: ${version.description}`;
-            //         versionHistoryList.appendChild(li);
-            //     });
-            // });
+            getVersions().then(versions => {
+                const versionHistoryList = document.getElementById('version-history');
+                versionHistoryList.innerHTML = '';
+                versions.forEach(version => {
+                    const li = document.createElement('li');
+                    li.textContent = `${version.name}: ${version.changelog}`;
+                    versionHistoryList.appendChild(li);
+                });
+            }).catch(error => {
+                console.error('Error fetching versions:', error);
+                alert('Failed to fetch version history.');
+            });
         }
 
         // Initial load of version history
-        updateVersionHistory();
+        document.addEventListener('DOMContentLoaded', updateVersionHistory);
     </script>
 </body>
 </html>

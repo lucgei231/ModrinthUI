@@ -49,15 +49,15 @@
     <script>
         // Fetch and display analytics data
         async function fetchAnalyticsData() {
-            const response = await fetch('/api/analytics', {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('PAT')}`
-                }
-            });
-            const data = await response.json();
-            document.getElementById('user-activity').innerText = `User Activity: ${data.userActivity}`;
-            document.getElementById('project-performance').innerText = `Project Performance: ${data.projectPerformance}`;
-            // Code to render charts goes here
+            try {
+                const data = await getAnalytics();
+                document.getElementById('user-activity').innerText = `User Activity: ${data.userActivity}`;
+                document.getElementById('project-performance').innerText = `Project Performance: ${data.projectPerformance}`;
+                // Code to render charts goes here
+            } catch (error) {
+                console.error('Error fetching analytics:', error);
+                alert('Failed to fetch analytics.');
+            }
         }
         fetchAnalyticsData();
     </script>

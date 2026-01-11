@@ -53,29 +53,38 @@
     <script src="js/api.js"></script>
     <script>
         // JavaScript to handle report submission and fetching existing reports
-        document.getElementById('new-report-form').addEventListener('submit', function(event) {
+        document.getElementById('new-report-form').addEventListener('submit', async function(event) {
             event.preventDefault();
             const title = document.getElementById('report-title').value;
             const content = document.getElementById('report-content').value;
-            // Call API to create a new report
-            // api.createReport(title, content).then(fetchReports);
+            try {
+                await manageReport({ title, body: content });
+                document.getElementById('new-report-form').reset();
+                fetchReports();
+            } catch (error) {
+                console.error('Error creating report:', error);
+                alert('Failed to create report.');
+            }
         });
 
-        function fetchReports() {
-            // Call API to fetch existing reports
-            // api.getReports().then(reports => {
-            //     const reportList = document.getElementById('report-list');
-            //     reportList.innerHTML = '';
-            //     reports.forEach(report => {
-            //         const li = document.createElement('li');
-            //         li.textContent = report.title;
-            //         reportList.appendChild(li);
-            //     });
-            // });
+        async function fetchReports() {
+            try {
+                const reports = await getReports();
+                const reportList = document.getElementById('report-list');
+                reportList.innerHTML = '';
+                reports.forEach(report => {
+                    const li = document.createElement('li');
+                    li.textContent = report.title;
+                    reportList.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error fetching reports:', error);
+                alert('Failed to fetch reports.');
+            }
         }
 
         // Initial fetch of reports
-        fetchReports();
+        document.addEventListener('DOMContentLoaded', fetchReports);
     </script>
 </body>
 </html>

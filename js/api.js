@@ -1,6 +1,6 @@
 // This file contains functions for interacting with Modrinth's API.
 
-const API_BASE_URL = 'https://api.modrinth.com/v1';
+const API_BASE_URL = 'https://api.modrinth.com/v2';
 
 // Helper function to get token from localStorage
 function getToken() {
@@ -13,9 +13,12 @@ async function getUserData() {
     if (!token) throw new Error('No token found');
     const response = await fetch(`${API_BASE_URL}/user`, {
         headers: {
-            'Authorization': token
+            'Authorization': `Bearer ${token}`
         }
     });
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     return response.json();
 }
 
@@ -26,7 +29,7 @@ async function updateUserData(userData) {
     const response = await fetch(`${API_BASE_URL}/user`, {
         method: 'PATCH',
         headers: {
-            'Authorization': token,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(userData)
@@ -40,9 +43,12 @@ async function getNotifications() {
     if (!token) throw new Error('No token found');
     const response = await fetch(`${API_BASE_URL}/notifications`, {
         headers: {
-            'Authorization': token
+            'Authorization': 'Bearer ' + token
         }
     });
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     return response.json();
 }
 
@@ -53,7 +59,7 @@ async function createNotification(notificationData) {
     const response = await fetch(`${API_BASE_URL}/notifications`, {
         method: 'POST',
         headers: {
-            'Authorization': token,
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(notificationData)
@@ -67,7 +73,7 @@ async function getPayouts() {
     if (!token) throw new Error('No token found');
     const response = await fetch(`${API_BASE_URL}/payouts`, {
         headers: {
-            'Authorization': token
+            'Authorization': 'Bearer ' + token
         }
     });
     return response.json();
@@ -80,7 +86,7 @@ async function createPayout(payoutData) {
     const response = await fetch(`${API_BASE_URL}/payouts`, {
         method: 'POST',
         headers: {
-            'Authorization': token,
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(payoutData)
@@ -94,7 +100,7 @@ async function getAnalytics() {
     if (!token) throw new Error('No token found');
     const response = await fetch(`${API_BASE_URL}/analytics`, {
         headers: {
-            'Authorization': token
+            'Authorization': 'Bearer ' + token
         }
     });
     return response.json();
@@ -105,12 +111,18 @@ async function searchProjects(query, facets = []) {
     const params = new URLSearchParams({ query });
     if (facets.length) params.set('facets', JSON.stringify(facets));
     const response = await fetch(`${API_BASE_URL}/search?${params}`);
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     return response.json();
 }
 
 // Function to get project details
 async function getProject(id) {
     const response = await fetch(`${API_BASE_URL}/project/${id}`);
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     return response.json();
 }
 
@@ -138,7 +150,7 @@ async function manageProject(projectData, method = 'POST') {
     const response = await fetch(`${API_BASE_URL}/project`, {
         method: method,
         headers: {
-            'Authorization': token,
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(projectData)
@@ -153,10 +165,22 @@ async function manageVersion(versionData, method = 'POST') {
     const response = await fetch(`${API_BASE_URL}/version`, {
         method: method,
         headers: {
-            'Authorization': token,
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(versionData)
+    });
+    return response.json();
+}
+
+// Function to get versions
+async function getVersions() {
+    const token = getToken();
+    if (!token) throw new Error('No token found');
+    const response = await fetch(`${API_BASE_URL}/versions`, {
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
     });
     return response.json();
 }
@@ -168,10 +192,22 @@ async function manageReport(reportData, method = 'POST') {
     const response = await fetch(`${API_BASE_URL}/report`, {
         method: method,
         headers: {
-            'Authorization': token,
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(reportData)
+    });
+    return response.json();
+}
+
+// Function to get reports
+async function getReports() {
+    const token = getToken();
+    if (!token) throw new Error('No token found');
+    const response = await fetch(`${API_BASE_URL}/reports`, {
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
     });
     return response.json();
 }
@@ -182,9 +218,23 @@ async function manageThread(threadData, method = 'POST') {
     if (!token) throw new Error('No token found');
     const response = await fetch(`${API_BASE_URL}/thread`, {
         method: method,
-        'Content-Type': 'application/json'
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(threadData)
+    });
+    return response.json();
+}
+
+// Function to get threads
+async function getThreads() {
+    const token = getToken();
+    if (!token) throw new Error('No token found');
+    const response = await fetch(`${API_BASE_URL}/threads`, {
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
     });
     return response.json();
 }
@@ -196,10 +246,22 @@ async function manageCollection(collectionData, method = 'POST') {
     const response = await fetch(`${API_BASE_URL}/collection`, {
         method: method,
         headers: {
-            'Authorization': token,
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(collectionData)
+    });
+    return response.json();
+}
+
+// Function to get collections
+async function getCollections() {
+    const token = getToken();
+    if (!token) throw new Error('No token found');
+    const response = await fetch(`${API_BASE_URL}/collections`, {
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
     });
     return response.json();
 }
@@ -211,10 +273,22 @@ async function manageOrganization(organizationData, method = 'POST') {
     const response = await fetch(`${API_BASE_URL}/organization`, {
         method: method,
         headers: {
-            'Authorization': token,
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(organizationData)
+    });
+    return response.json();
+}
+
+// Function to get organizations
+async function getOrganizations() {
+    const token = getToken();
+    if (!token) throw new Error('No token found');
+    const response = await fetch(`${API_BASE_URL}/organizations`, {
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
     });
     return response.json();
 }

@@ -45,7 +45,39 @@
     <script src="js/app.js"></script>
     <script src="js/api.js"></script>
     <script>
-        // JavaScript to handle organization management will go here
+        // Load organizations on page load
+        document.addEventListener('DOMContentLoaded', loadOrganizations);
+
+        // Function to load and display organizations
+        async function loadOrganizations() {
+            try {
+                const organizations = await getOrganizations();
+                const organizationsList = document.getElementById('organizations');
+                organizationsList.innerHTML = '';
+                organizations.forEach(org => {
+                    const li = document.createElement('li');
+                    li.textContent = org.name;
+                    organizationsList.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error loading organizations:', error);
+                alert('Failed to load organizations: ' + error.message);
+            }
+        }
+
+        // Handle form submission to create organization
+        document.getElementById('create-organization-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const name = document.getElementById('org-name').value;
+            try {
+                await manageOrganization({ name });
+                document.getElementById('create-organization-form').reset();
+                loadOrganizations(); // Reload organizations
+            } catch (error) {
+                console.error('Error creating organization:', error);
+                alert('Failed to create organization: ' + error.message);
+            }
+        });
     </script>
 </body>
 </html>
