@@ -112,6 +112,9 @@ async function getAnalytics() {
             'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0'
         }
     });
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     return response.json();
 }
 
