@@ -52,19 +52,29 @@
         // Fetch and display user data
         async function fetchUserData() {
             const userDetails = document.getElementById('user-details');
-            const userData = await getUserData(); // Assuming getUserData is defined in api.js
-            userDetails.innerHTML = `
-                <p>Email: ${userData.email}</p>
-                <p>Username: ${userData.username}</p>
-            `;
+            try {
+                const userData = await getUserData();
+                userDetails.innerHTML = `
+                    <p>Email: ${userData.email}</p>
+                    <p>Username: ${userData.username}</p>
+                `;
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+                userDetails.innerHTML = '<p>Error fetching user data: ' + error.message + '</p>';
+            }
         }
 
         document.getElementById('user-form').addEventListener('submit', async (event) => {
             event.preventDefault();
             const email = document.getElementById('email').value;
             const username = document.getElementById('username').value;
-            await updateUserData({ email, username }); // Assuming updateUserData is defined in api.js
-            fetchUserData();
+            try {
+                await updateUserData({ email, username });
+                fetchUserData();
+            } catch (error) {
+                console.error('Error updating user data:', error);
+                alert('Error updating user data: ' + error.message);
+            }
         });
 
         fetchUserData();

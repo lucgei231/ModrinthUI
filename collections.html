@@ -66,7 +66,7 @@
                 });
             } catch (error) {
                 console.error('Error loading collections:', error);
-                alert('Failed to load collections.');
+                alert('Failed to load collections: ' + error.message);
             }
         }
 
@@ -81,7 +81,7 @@
                 loadCollections(); // Reload collections
             } catch (error) {
                 console.error('Error creating collection:', error);
-                alert('Failed to create collection.');
+                alert('Failed to create collection: ' + error.message);
             }
         });
     </script>

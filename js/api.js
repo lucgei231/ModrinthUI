@@ -13,7 +13,8 @@ async function getUserData() {
     if (!token) throw new Error('No token found');
     const response = await fetch(`${API_BASE_URL}/user`, {
         headers: {
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`,
+            'User-Agent': 'ModrinthUI/1.0'
         }
     });
     if (!response.ok) {
@@ -30,10 +31,14 @@ async function updateUserData(userData) {
         method: 'PATCH',
         headers: {
             'Authorization': `Bearer ${token}`,
+            'User-Agent': 'ModrinthUI/1.0',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(userData)
     });
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     return response.json();
 }
 
@@ -43,7 +48,8 @@ async function getNotifications() {
     if (!token) throw new Error('No token found');
     const response = await fetch(`${API_BASE_URL}/notifications`, {
         headers: {
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0',
+            'User-Agent': 'ModrinthUI/1.0'
         }
     });
     if (!response.ok) {
@@ -59,7 +65,7 @@ async function createNotification(notificationData) {
     const response = await fetch(`${API_BASE_URL}/notifications`, {
         method: 'POST',
         headers: {
-            'Authorization': 'Bearer ' + token,
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(notificationData)
@@ -73,9 +79,12 @@ async function getPayouts() {
     if (!token) throw new Error('No token found');
     const response = await fetch(`${API_BASE_URL}/payouts`, {
         headers: {
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0'
         }
     });
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     return response.json();
 }
 
@@ -86,7 +95,7 @@ async function createPayout(payoutData) {
     const response = await fetch(`${API_BASE_URL}/payouts`, {
         method: 'POST',
         headers: {
-            'Authorization': 'Bearer ' + token,
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(payoutData)
@@ -100,7 +109,7 @@ async function getAnalytics() {
     if (!token) throw new Error('No token found');
     const response = await fetch(`${API_BASE_URL}/analytics`, {
         headers: {
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0'
         }
     });
     return response.json();
@@ -110,7 +119,11 @@ async function getAnalytics() {
 async function searchProjects(query, facets = []) {
     const params = new URLSearchParams({ query });
     if (facets.length) params.set('facets', JSON.stringify(facets));
-    const response = await fetch(`${API_BASE_URL}/search?${params}`);
+    const response = await fetch(`${API_BASE_URL}/search?${params}`, {
+        headers: {
+            'User-Agent': 'ModrinthUI/1.0'
+        }
+    });
     if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
@@ -119,7 +132,11 @@ async function searchProjects(query, facets = []) {
 
 // Function to get project details
 async function getProject(id) {
-    const response = await fetch(`${API_BASE_URL}/project/${id}`);
+    const response = await fetch(`${API_BASE_URL}/project/${id}`, {
+        headers: {
+            'User-Agent': 'ModrinthUI/1.0'
+        }
+    });
     if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
@@ -150,7 +167,7 @@ async function manageProject(projectData, method = 'POST') {
     const response = await fetch(`${API_BASE_URL}/project`, {
         method: method,
         headers: {
-            'Authorization': 'Bearer ' + token,
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(projectData)
@@ -165,7 +182,7 @@ async function manageVersion(versionData, method = 'POST') {
     const response = await fetch(`${API_BASE_URL}/version`, {
         method: method,
         headers: {
-            'Authorization': 'Bearer ' + token,
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(versionData)
@@ -179,7 +196,7 @@ async function getVersions() {
     if (!token) throw new Error('No token found');
     const response = await fetch(`${API_BASE_URL}/versions`, {
         headers: {
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0'
         }
     });
     return response.json();
@@ -192,7 +209,7 @@ async function manageReport(reportData, method = 'POST') {
     const response = await fetch(`${API_BASE_URL}/report`, {
         method: method,
         headers: {
-            'Authorization': 'Bearer ' + token,
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(reportData)
@@ -206,7 +223,7 @@ async function getReports() {
     if (!token) throw new Error('No token found');
     const response = await fetch(`${API_BASE_URL}/reports`, {
         headers: {
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0'
         }
     });
     return response.json();
@@ -219,7 +236,7 @@ async function manageThread(threadData, method = 'POST') {
     const response = await fetch(`${API_BASE_URL}/thread`, {
         method: method,
         headers: {
-            'Authorization': 'Bearer ' + token,
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(threadData)
@@ -233,7 +250,7 @@ async function getThreads() {
     if (!token) throw new Error('No token found');
     const response = await fetch(`${API_BASE_URL}/threads`, {
         headers: {
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0'
         }
     });
     return response.json();
@@ -246,7 +263,7 @@ async function manageCollection(collectionData, method = 'POST') {
     const response = await fetch(`${API_BASE_URL}/collection`, {
         method: method,
         headers: {
-            'Authorization': 'Bearer ' + token,
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(collectionData)
@@ -260,7 +277,7 @@ async function getCollections() {
     if (!token) throw new Error('No token found');
     const response = await fetch(`${API_BASE_URL}/collections`, {
         headers: {
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0'
         }
     });
     return response.json();
@@ -273,7 +290,7 @@ async function manageOrganization(organizationData, method = 'POST') {
     const response = await fetch(`${API_BASE_URL}/organization`, {
         method: method,
         headers: {
-            'Authorization': 'Bearer ' + token,
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(organizationData)
@@ -287,7 +304,7 @@ async function getOrganizations() {
     if (!token) throw new Error('No token found');
     const response = await fetch(`${API_BASE_URL}/organizations`, {
         headers: {
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token, 'User-Agent': 'ModrinthUI/1.0'
         }
     });
     return response.json();

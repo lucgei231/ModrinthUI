@@ -56,7 +56,7 @@
                 // Code to render charts goes here
             } catch (error) {
                 console.error('Error fetching analytics:', error);
-                alert('Failed to fetch analytics.');
+                alert('Failed to fetch analytics: ' + error.message);
             }
         }
         fetchAnalyticsData();

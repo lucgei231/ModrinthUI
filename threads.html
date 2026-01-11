@@ -78,7 +78,7 @@
                 loadThreads();
             }).catch(error => {
                 console.error('Error creating thread:', error);
-                alert('Failed to create thread.');
+                alert('Failed to create thread: ' + error.message);
             });
         }
     </script>

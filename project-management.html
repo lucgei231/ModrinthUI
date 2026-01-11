@@ -66,13 +66,14 @@
         // Search projects
         document.getElementById('search-form').addEventListener('submit', async (event) => {
             event.preventDefault();
-            const query = document.getElementById('search-query').value;
+            let query = document.getElementById('search-query').value;
+            if (!query) query = '*';
             try {
                 const results = await searchProjects(query);
                 displaySearchResults(results.hits);
             } catch (error) {
                 console.error('Error searching projects:', error);
-                document.getElementById('search-results').innerHTML = '<p>Error searching projects.</p>';
+                document.getElementById('search-results').innerHTML = '<p>Error searching projects: ' + error.message + '</p>';
             }
         });
 
@@ -134,14 +135,44 @@
             const name = document.getElementById('project-name').value;
             const description = document.getElementById('project-description').value;
             try {
-                const result = await manageProject({ title: name, description });
+                const result = await manageProject({ 
+                    title: name, 
+                    description, 
+                    slug: name.toLowerCase().replace(/[^a-z0-9-]/g, '-'), 
+                    type: "mod", 
+                    categories: [], 
+                    status: "draft", 
+                    requested_status: "approved", 
+                    client_side: "required", 
+                    server_side: "required" 
+                });
                 alert('Project created successfully!');
-                // Refresh list if needed
+                loadProjects(); // Refresh list
             } catch (error) {
                 console.error('Error creating project:', error);
-                alert('Error creating project.');
+                alert('Error creating project: ' + error.message);
             }
         });
+
+        // Load projects on page load
+        document.addEventListener('DOMContentLoaded', loadProjects);
+
+        async function loadProjects() {
+            try {
+                const user = await getUserData();
+                const results = await searchProjects('*', [["author:" + user.username]]);
+                const projectsList = document.getElementById('projects');
+                projectsList.innerHTML = '';
+                results.hits.forEach(project => {
+                    const li = document.createElement('li');
+                    li.textContent = project.title;
+                    projectsList.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                document.getElementById('projects').innerHTML = '<li>Error loading projects: ' + error.message + '</li>';
+            }
+        }
     </script>
 </body>
 </html>
